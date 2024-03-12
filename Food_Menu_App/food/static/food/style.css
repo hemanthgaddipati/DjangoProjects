@@ -1,0 +1,16 @@
+body {
+    background-color: beige;
+}
+img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.col-md-4 {
+    padding-top: 15px;
+}
+.col-md-2 {
+    padding-top: 40px;
+}
