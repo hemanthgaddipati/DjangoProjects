@@ -1,0 +1,28 @@
+{% extends 'food/base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                
+                <div class="item-detail-container d-flex align-items-center" style="padding: 15px; margin-top: 20px;">
+                    <div class="image-container" style="flex: 0 0 50%; max-width: 50%; padding-right: 55px;">
+                        <h3 style="padding: 50px;">{{ user.username }}</h3>
+                        <img class="img-fluid" 
+                             style="width: 50%; height: 300px; object-fit: cover; border-radius: 5%;"
+                             src="{{ user.profile.image.url }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

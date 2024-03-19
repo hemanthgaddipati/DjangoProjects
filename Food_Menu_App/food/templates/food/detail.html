@@ -10,18 +10,23 @@
     {% block body %}
         <div class="container">
             <div class="row">
-                <div class="col-md-3 offset-md-2">
-                    <img src="{{ item.item_image }}"/>
-                </div>
+                <div class="col-md-10 offset-md-1">
+                    <div class="item-detail-container d-flex align-items-center" style="border: 3px solid #007bff; border-radius: 20px; overflow: hidden; padding: 15px; margin-top: 20px;">
+                        <div class="image-container" style="flex: 1; padding-right: 15px;">
+                            <img src="{{ item.item_image }}" style="width: 100%; height: auto; object-fit: cover;"/>
+                        </div>
 
-                <div class="col-md-3">
-                    <h1>{{ item.item_name }}</h1>
-                    <h2>{{ item.item_desc }}</h2>
-                    <h3>${{ item.item_price }}</h3>
+                        <div class="details-container" style="flex: 1; padding-left: 15px;">
+                            <h1>{{ item.item_name }}</h1>
+                            <h2>{{ item.item_desc }}</h2>
+                            <h3>${{ item.item_price }}</h3>
+                            <a class="btn btn-danger" href="{% url 'food:delete_item' item.id %}">Delete</a>
+                            <a class="btn btn-primary" href="{% url 'food:update_item' item.id %}">Update</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>    
     {% endblock %}
-
 </body>
 </html>
