@@ -1,15 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit">SignUp</button>
-    </form>
-</body>
-</html>
+{% extends 'food/base.html' %}
+
+{% block body %}
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden; /* Prevent scrolling */
+    }
+    .full-height {
+        display: flex;
+        align-items: center; /* Center align vertically */
+        justify-content: center;
+        min-height: 80vh;
+        padding-top: 10px;
+    }
+    .card-container {
+        max-width: 1000px; /* Adjust the size of the card here */
+        width: 100%;
+        margin: auto;
+    }
+    .card {
+        padding: 20px; /* Reduce padding inside the card to decrease height */
+    }
+    .greeting {
+        text-align: center;
+        margin-bottom: 2rem; /* Reduce bottom margin to decrease overall card height */
+        font-family: optima;
+        font-size: 30px; /* Optional: Adjust the font size if needed */
+        font-weight: bold; /* Make the text bold */
+    }
+    .form-floating {
+        margin-bottom: 5px; /* Reduce spacing between form fields to decrease card height */
+    }
+</style>
+
+<div class="full-height">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-body">
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="greeting">
+                    <h2>Hello there! Please Signup to continue</h2>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-floating">
+                        <input type="text" name="username" id="{{ form.username.id_for_label }}" class="form-control" placeholder="Username" required>
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="email" name="email" id="{{ form.email.id_for_label }}" class="form-control" placeholder="Email">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {% if form.email.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.email.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="password" name="password" id="{{ form.password.id_for_label }}" class="form-control" placeholder="Password" required>
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                        {% if form.password.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.password.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="password" name="confirm_password" id="{{ form.confirm_password.id_for_label }}" class="form-control" placeholder="Confirm Password" required>
+                        <label for="{{ form.confirm_password.id_for_label }}">Confirm Password</label>
+                        {% if form.confirm_password.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.confirm_password.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

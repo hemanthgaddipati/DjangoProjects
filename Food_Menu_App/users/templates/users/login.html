@@ -1,15 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+{% extends 'food/base.html' %}
+
+{% block body %}
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden; /* Prevent scrolling */
+    }
+    .full-height {
+        display: flex;
+        align-items: flex-start; /* Align items to the start of the container */
+        justify-content: center;
+        min-height: 100vh;
+        padding-top: 10vh; /* Adjust top padding to push content upwards */
+    }
+    .greeting {
+        text-align: center;
+        margin-bottom: 3rem;
+        font-family: optima;
+        font-size: 30px; /* Optional: Adjust the font size */
+        font-weight: bold; /* Make the text bold */
+    }
+    .login-image {
+        width: 100%;
+        border-radius: 0; /* No rounding initially */
+    }
+    @media (max-width: 768px) {
+        /* When the browser size is 768px or less, apply these styles */
+        .login-image {
+            width: 120px; /* Smaller, fixed size for the logo */
+            height: 120px; /* Keep the height the same as the width */
+            border-radius: 50%; /* Fully rounded */
+            margin: 0 auto; /* Center the image */
+        }
+        .full-height {
+            align-items: center; /* Center align when in smaller screens */
+        }
+    }
+</style>
+
+<div class="full-height">
+    <section class="text-center">
+        <div class="card">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-4 col-md-12">
+                    <img src="https://static.vecteezy.com/system/resources/previews/002/283/134/non_2x/mobile-phone-settings-with-gears-free-vector.jpg" alt="Login Image" class="login-image rounded-lg-top-0 rounded-lg-bottom-5" />
+                </div>
+                <div class="col-lg-8">
+                    <div class="card-body py-5 px-md-5">
+                        {% if error_message %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error_message }}
+                            </div>
+                        {% endif %}
+                        <div class="greeting">
+                            <p>Hello there! Please login or register to continue.</p>
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-floating mb-4">
+                                <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required>
+                                <label for="id_username">Username</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+                                <label for="id_password">Password</label>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-success" type="submit">LogIn</button>
+                                <a class="btn btn-dark" type="button" href="{% url 'register' %}">Register</a>
+                                <!-- <button class="btn btn-dark" type="button">Register</button> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

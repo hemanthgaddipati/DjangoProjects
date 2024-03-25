@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>You are logged out!</h1>
-</body>
-</html>
+{% extends 'food/base.html' %}
+
+{% block body %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 45vh;">
+    <div class="card text-center" style="width: 25rem;">
+        <div class="card-body">
+            <h5 class="card-title">You are logged out!</h5>
+            <p class="card-text">Please login to continue.</p>
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
